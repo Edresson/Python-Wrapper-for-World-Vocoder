@@ -357,7 +357,7 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
         cpp_aperiodicity, fft_size, frame_period, fs, y_length, &y[0])
     return y
 
-def wav2world(x, fs, fft_size=None, frame_period=default_frame_period, mcsize=59, aporder=5):
+def wav2world(x, fs, fft_size=None, frame_period=default_frame_period, ap_depth=5):
     """Convenience function to do all WORLD analysis steps in a single call.
 
     In this case only `frame_period` can be configured and other parameters
@@ -389,5 +389,5 @@ def wav2world(x, fs, fft_size=None, frame_period=default_frame_period, mcsize=59
     _f0, t = dio(x, fs, frame_period=frame_period)
     f0 = stonemask(x, _f0, t, fs)
     sp = cheaptrick(x, f0, t, fs, fft_size=fft_size)
-    ap = d4c(x, f0, t, fs, order=aporder, fft_size=fft_size)
+    ap = d4c(x, f0, t, fs, order=ap_depth, fft_size=fft_size)
     return f0, sp, ap
