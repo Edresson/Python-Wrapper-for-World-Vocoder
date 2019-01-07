@@ -60,7 +60,7 @@ cdef extern from "world/stonemask.h":
         double *refined_f0) except +
 
 
-default_frame_period = 16.0
+default_frame_period = 8.0
 default_f0_floor = 71.0
 default_f0_ceil = 800.0
 
