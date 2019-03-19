@@ -85,7 +85,7 @@ cdef extern from "world/codec.h":
         double **spectrogram) except +
 
 
-default_frame_period = 5.0
+default_frame_period = 15.0
 default_f0_floor = 71.0
 default_f0_ceil = 800.0
 
@@ -650,7 +650,7 @@ def wav2world(x, fs, fft_size=None, frame_period=default_frame_period):
     ap : ndarray
         Aperiodicity.
     """
-    _f0, t = dio(x, fs, frame_period=frame_period)
+    _f0, t = harvest(x, fs, frame_period=frame_period)
     f0 = stonemask(x, _f0, t, fs)
     sp = cheaptrick(x, f0, t, fs, fft_size=fft_size)
     ap = d4c(x, f0, t, fs, fft_size=fft_size)
